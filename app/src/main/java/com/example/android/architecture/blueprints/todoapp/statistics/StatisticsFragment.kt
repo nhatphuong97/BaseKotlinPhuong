@@ -23,35 +23,28 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.android.architecture.blueprints.todoapp.R
+import com.example.android.architecture.blueprints.todoapp.base.BaseFragment
 import com.example.android.architecture.blueprints.todoapp.databinding.StatisticsFragBinding
+import com.example.android.architecture.blueprints.todoapp.databinding.StatisticsFragBindingImpl
 import com.example.android.architecture.blueprints.todoapp.util.getViewModelFactory
 import com.example.android.architecture.blueprints.todoapp.util.setupRefreshLayout
+import kotlinx.android.synthetic.main.statistics_frag.*
 
 /**
  * Main UI for the statistics screen.
  */
-class StatisticsFragment : Fragment() {
+class StatisticsFragment : BaseFragment<StatisticsFragBindingImpl,StatisticsViewModel>() {
 
     private lateinit var viewDataBinding: StatisticsFragBinding
 
     private val viewModel by viewModels<StatisticsViewModel> { getViewModelFactory() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewDataBinding = DataBindingUtil.inflate(
-            inflater, R.layout.statistics_frag, container,
-            false
-        )
-        return viewDataBinding.root
+
+    override fun layoutId(): Int {
+        return R.layout.statistics_frag
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewDataBinding.viewmodel = viewModel
-        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+    override fun initFragment() {
         this.setupRefreshLayout(viewDataBinding.refreshLayout)
     }
 }

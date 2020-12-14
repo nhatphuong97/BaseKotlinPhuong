@@ -24,6 +24,7 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.example.android.architecture.blueprints.todoapp.Event
 import com.example.android.architecture.blueprints.todoapp.R
+import com.example.android.architecture.blueprints.todoapp.base.BaseViewModel
 import com.example.android.architecture.blueprints.todoapp.data.Result
 import com.example.android.architecture.blueprints.todoapp.data.Result.Success
 import com.example.android.architecture.blueprints.todoapp.data.Task
@@ -35,7 +36,7 @@ import kotlinx.coroutines.launch
  */
 class TaskDetailViewModel(
     private val tasksRepository: TasksRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _taskId = MutableLiveData<String>()
 
